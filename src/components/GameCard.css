@@ -1,0 +1,35 @@
+.game-button {
+    margin-top: 15px;
+    padding: 15px 30px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 160px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.8);
+    position: relative;
+    border: 2px solid transparent;
+    animation: rgbBorder 4s linear infinite;
+  }
+  
+  @keyframes rgbBorder {
+    0% { border-color: rgb(255, 0, 0); }
+    16.666% { border-color: rgb(255, 0, 255); }
+    33.333% { border-color: rgb(0, 0, 255); }
+    50% { border-color: rgb(0, 255, 255); }
+    66.666% { border-color: rgb(0, 255, 0); }
+    83.333% { border-color: rgb(255, 255, 0); }
+    100% { border-color: rgb(255, 0, 0); }
+  }
+  
+  .game-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .game-button:active {
+    transform: scale(0.95);
+  }

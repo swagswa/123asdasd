@@ -1,0 +1,154 @@
+.game-container {
+  min-height: 100vh;
+  background: linear-gradient(
+    -45deg, 
+    #1a0808,  /* очень темный красный */
+    #120505,  /* почти черный красный */
+    #0d0404,  /* максимально темный красный */
+    #080202   /* практически черный */
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 25s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.game-container::before,
+.game-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  border-radius: 43%;
+  background-color: rgba(89, 0, 0, 0.1);  /* Темнее красный с меньшей прозрачностью */
+  animation: wave 25s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform-origin: 0% 0%;
+}
+
+.game-container::after {
+  width: 220%;
+  height: 220%;
+  border-radius: 47%;
+  background-color: rgba(89, 0, 0, 0.08);  /* Темнее красный с меньшей прозрачностью */
+  animation: wave 35s infinite cubic-bezier(0.645, 0.045, 0.355, 1) reverse;
+}
+
+.game-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 390px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes wave {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@media screen and (min-width: 390px) and (min-height: 844px) {
+  .game-content {
+    justify-content: flex-start;
+    padding-top: 20px;
+  }
+  
+  .character {
+    margin: 20px 0;
+  }
+}
+
+/* Добавим специальный класс для JetX */
+.game-container.jetx {
+  background: linear-gradient(
+    -45deg, 
+    #1a1507,  /* очень темный золотой */
+    #120f05,  /* почти черный золотой */
+    #0d0b04,  /* максимально темный золотой */
+    #080602   /* практически черный золотой */
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease-in-out infinite;
+}
+
+/* Обновим волны для JetX */
+.game-container.jetx::before,
+.game-container.jetx::after {
+  background-color: rgba(255, 215, 0, 0.1);  /* Золотистый оттенок */
+}
+
+.game-container.jetx::after {
+  background-color: rgba(255, 215, 0, 0.08);  /* Золотистый оттенок */
+}
+
+/* Добавим специальный класс для RocketQueen */
+.game-container.rocket-queen {
+  background: linear-gradient(
+    -45deg, 
+    #150a1a,  /* очень темный фиолетовый */
+    #0f0712,  /* почти черный фиолетовый */
+    #0a050d,  /* максимально темный фиолетовый */
+    #050208   /* практически черный фиолетовый */
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease-in-out infinite;
+}
+
+/* Обновим волны для RocketQueen */
+.game-container.rocket-queen::before,
+.game-container.rocket-queen::after {
+  background-color: rgba(147, 112, 219, 0.1);  /* Светло-фиолетовый оттенок */
+}
+
+.game-container.rocket-queen::after {
+  background-color: rgba(147, 112, 219, 0.08);  /* Светло-фиолетовый оттенок */
+}
+
+/* Добавим специальный класс для SpaceX */
+.game-container.space-x {
+  background: linear-gradient(
+    -45deg, 
+    #0a141a,  /* очень темный синий */
+    #050c12,  /* почти черный синий */
+    #04080d,  /* максимально темный синий */
+    #020508   /* практически черный синий */
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease-in-out infinite;
+}
+
+/* Обновим волны для SpaceX */
+.game-container.space-x::before,
+.game-container.space-x::after {
+  background-color: rgba(0, 191, 255, 0.1);  /* Светло-голубой оттенок */
+}
+
+.game-container.space-x::after {
+  background-color: rgba(0, 191, 255, 0.08);  /* Светло-голубой оттенок */
+}
+  

@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import GamePageLuckyJet from "./pages/GamePageLuckyJet";
+import GamePageJetX from "./pages/GamePageJetX";
+import GamePageRocketQueen from "./pages/GamePageRocketQueen";
+import GamePageSpaceX from "./pages/GamePageSpaceX";
 import './App.css';
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/game1" element={<GamePageLuckyJet title="Game 1" />} />
+        <Route path="/game2" element={<GamePageJetX title="Game 2" />} />
+        <Route path="/game3" element={<GamePageRocketQueen title="Game 3" />} />
+        <Route path="/game4" element={<GamePageSpaceX title="Game 4" />} />
+
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
