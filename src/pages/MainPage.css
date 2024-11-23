@@ -1,507 +1,549 @@
 :root {
-  /* Базовые размеры (для маленьких телефонов) */
-  --img-width-1: 260px;
-  --img-height-1: 260px;
-  
-  --img-width-2: 260px;
-  --img-height-2: 220px;
-  
-  --img-width-3: 260px;
-  --img-height-3: 180px;
-  
-  --img-width-default: 260px;
-  --img-height-default: 260px;
-  
-  --gradient-color-1: #8B0000; /* темно-красный */
-  --gradient-color-2: #800080; /* фиолетовый */
-  --gradient-color-3: #4B0082; /* индиго */
-  --gradient-color-4: #8B0000; /* темно-красный */
+  --color-background: #2b1b2d;
+  --spacing-base: clamp(4px, 1vw, 16px);
+  --image-size: clamp(350px, 45vw, 550px);
 }
 
-/* iPhone SE, маленькие телефоны */
-@media screen and (min-width: 320px) {
-  :root {
-    --img-width-1: 260px;
-    --img-height-1: 260px;
-    
-    --img-width-2: 260px;
-    --img-height-2: 220px;
-  
-    --img-width-3: 260px;
-    --img-height-3: 180px;
-    
-    --img-width-default: 260px;
-    --img-height-default: 260px;
-  }
-}
-
-/* iPhone 12/13 Mini, средние телефоны */
-@media screen and (min-width: 375px) {
-  :root {
-    --img-width-1: 280px;
-    --img-height-1: 280px;
-    
-    --img-width-2: 280px;
-    --img-height-2: 240px;
-    
-    --img-width-3: 280px;
-    --img-height-3: 200px;
-    
-    --img-width-default: 280px;
-    --img-height-default: 280px;
-  }
-}
-
-/* iPhone 12/13/14, большие телефоны */
-@media screen and (min-width: 390px) {
-  :root {
-    --img-width-1: 290px;
-    --img-height-1: 290px;
-    
-    --img-width-2: 290px;
-    --img-height-2: 250px;
-    
-    --img-width-3: 290px;
-    --img-height-3: 210px;
-    
-    --img-width-default: 290px;
-    --img-height-default: 290px;
-  }
-}
-
-/* iPhone 12/13/14 Pro Max, очень большие телефоны */
-@media screen and (min-width: 428px) {
-  :root {
-    --img-width-1: 310px;
-    --img-height-1: 310px;
-    
-    --img-width-2: 310px;
-    --img-height-2: 270px;
-    
-    --img-width-3: 310px;
-    --img-height-3: 230px;
-    
-    --img-width-default: 310px;
-    --img-height-default: 310px;
-  }
-}
-
-/* Для высоких экранов */
-@media screen and (min-height: 800px) {
-  .game-card {
-    height: 340px;
-  }
-}
-
-@media screen and (min-height: 844px) {
-  .game-card {
-    height: 360px;
-  }
-}
-
-/* Добавим поддержку ландшафтной ориентации */
-@media screen and (orientation: landscape) and (max-height: 428px) {
-  :root {
-    --img-width-1: 240px;
-    --img-height-1: 240px;
-    
-    --img-width-2: 240px;
-    --img-height-2: 200px;
-    
-    --img-width-3: 240px;
-    --img-height-3: 160px;
-    
-    --img-width-default: 240px;
-    --img-height-default: 240px;
-  }
-  
-  .game-card {
-    height: 280px;
-  }
-}
-
-/* Остальные стили остаются без изменений */
-.game-card:first-child img {
-  width: var(--img-width-1);
-  height: var(--img-height-1);
-  margin-top: -10px;
-}
-
-.game-card:nth-child(2) img {
-  width: calc(var(--img-width-2) * 3);
-  height: calc(var(--img-height-2) * 3);
-  object-fit: contain;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-}
-
-.game-card:not(:first-child):not(:nth-child(2)) img {
-  width: var(--img-width-default);
-  height: var(--img-height-default);
-  object-fit: contain;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-}
-
-.main-container {
+.root {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background: linear-gradient(
-    -45deg,
-    var(--gradient-color-1),
-    var(--gradient-color-2),
-    var(--gradient-color-3),
-    var(--gradient-color-4)
-  );
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease-in-out infinite;
+  display: grid;
+  place-items: center;
+  padding: calc(var(--spacing-base) * 2);
   position: relative;
   overflow: hidden;
+  background: linear-gradient(45deg, 
+    #0a0014,
+    #130029, 
+    #1a003d, 
+    #20004d, 
+    #2a0066,
+    #20004d,
+    #1a003d
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
 }
 
 @keyframes gradientBG {
-  0% { 
-    background-position: 0% 50%;
-    opacity: 0.8;
-  }
-  50% { 
-    background-position: 100% 50%;
-    opacity: 0.95;
-  }
-  100% { 
-    background-position: 0% 50%;
-    opacity: 0.8;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.main-logo {
-  width: 200px;
-  margin-bottom: 35px;
-  animation: float 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))
-         drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
+.container {
+  position: relative;
+  z-index: 2;
+  width: min(90vw, 2600px);
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  padding-top: calc(var(--image-size) - 267px);
+  margin-left: -20px;
 }
 
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+.welcome-text {
+  font-size: clamp(24px, 4vw, 48px);
+  color: white;
+  text-align: center;
+  margin: calc(var(--spacing-base) * 4) 0;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  max-width: 600px;
-  padding: 0 10px;
-  margin-bottom: 20px;
+  position: absolute;
+  top: -80px;
+  left: 0px;
+  padding-top: 20px;
+  z-index: 3;
+}
+
+.header__logo {
+  width: clamp(180px, 35vw, 380px);
+  height: auto;
+  object-fit: contain;
+  animation: logoFloat 3s ease-in-out infinite;
+  margin-left: 0px;
+  margin-top: -50px;
+  opacity: 1;
+  filter: drop-shadow(0 0 10px #ffffff) 
+          drop-shadow(0 0 20px #ffffff)
+          drop-shadow(0 0 30px #ffffff);
+  z-index: 3;
+}
+
+@keyframes logoFloat {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-5px) rotate(1deg); }
+  75% { transform: translateY(5px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+.main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0px;
+  width: 100%;
+  margin-left: -20px;
+  transform: scale(0.95);
+}
+
+@media (min-width: 2556px) {
+  :root {
+    --spacing-base: clamp(8px, 0.5vw, 24px);
+  }
+  
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 2800px;
+    margin: 0 auto;
+  }
+  
+  .game-card {
+    max-width: 600px;
+  }
+  
+  .container {
+    margin-left: -100px;
+  }
+  
+  .main {
+    margin-left: -100px;
+  }
 }
 
 .game-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 320px;
+  margin-bottom: 0;
   padding: 12px;
+  transition: all 0.3s ease;
   position: relative;
+  margin-left: -20px;
+  transform: scale(0.95);
 }
 
 .game-card:first-child {
-  height: 320px;
+  margin-left: 0;
+  margin: 20px auto 0;
 }
 
-.game-card button {
-  position: absolute;
-  bottom: 15px;
-  width: 90%;
-  padding: 14px 0;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: 600;
+/* Обновляем стили для изображений */
+.game-card img {
+  width: var(--image-size);
+  height: var(--image-size);
+  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  animation: float1 3s ease-in-out infinite,
+             rgbGlow 8s linear infinite;
+  opacity: 1;
 }
 
-@media screen and (min-width: 390px) and (min-height: 844px) {
-  .games-grid {
-    gap: 20px;
-    max-width: 620px;
-  }
-  
-  .game-card {
-    height: 340px;
-  }
-  
-  .game-card:nth-child(2) img {
-    width: var(--img-width-2);
-    height: var(--img-height-2);
-  }
-  
-  .game-card:nth-child(3) img {
-    width: var(--img-width-3);
-    height: var(--img-height-3);
-  }
-  
-  .game-card:not(:first-child):not(:nth-child(3)) img {
-    width: var(--img-width-default);
-    height: var(--img-height-default);
-  }
-  
-  .game-card:first-child img {
-    width: var(--img-width-1);
-    height: var(--img-height-1);
-  }
-  
-  .game-card button {
-    font-size: 17px;
-    padding: 16px 0;
-  }
-  
-  .main-logo {
-    width: 220px;
-    margin-bottom: 40px;
-  }
+/* Разные анимации плавания */
+@keyframes float1 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
 }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; opacity: 0.7; }
-  50% { background-position: 100% 50%; opacity: 0.9; }
-  100% { background-position: 0% 50%; opacity: 0.7; }
+@keyframes float2 {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
-@keyframes wave {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+@keyframes float3 {
+  0% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(-1deg); }
+  66% { transform: translateY(8px) rotate(1deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
-.content-wrapper {
-  position: relative;
-  z-index: 1;
+@keyframes float4 {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-12px); }
+  75% { transform: translateY(8px); }
+  100% { transform: translateY(0); }
+}
+
+/* Добавляем контейнер для частиц */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 600px;
-  height: 100vh;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 10px;
-  box-sizing: border-box;
-  padding-top: 20px;
-}
-@media screen and (min-height: 852px) {
-  .content-wrapper {
-    justify-content: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-@media screen and (min-width: 390px) and (min-height: 844px) {
-  .content-wrapper {
-    max-width: 360px;
-    padding: 0 12px;
-  }
-  
-  .grid {
-    gap: 16px;
-  }
-  
-  .card-container {
-    height: 160px;
-  }
+/* Стили для частиц */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.8;
 }
 
-@keyframes shimmer {
+.particle:nth-child(5n) {
+  background: linear-gradient(to right, #ffffff, #ffcccc);
+  box-shadow: 
+    0 0 20px rgba(255, 102, 102, 0.8),
+    0 0 35px rgba(255, 51, 51, 0.6),
+    0 0 50px rgba(255, 0, 0, 0.4);
+}
+
+.particle:nth-child(5n+1) {
+  background: linear-gradient(to right, #ffffff, #cce6ff);
+  box-shadow: 
+    0 0 20px rgba(102, 178, 255, 0.8),
+    0 0 35px rgba(51, 153, 255, 0.6),
+    0 0 50px rgba(0, 128, 255, 0.4);
+}
+
+.particle:nth-child(5n+2) {
+  background: linear-gradient(to right, #ffffff, #ffccff);
+  box-shadow: 
+    0 0 20px rgba(255, 102, 255, 0.8),
+    0 0 35px rgba(255, 51, 255, 0.6),
+    0 0 50px rgba(255, 0, 255, 0.4);
+}
+
+.particle:nth-child(5n+3) {
+  background: linear-gradient(to right, #ffffff, #ffffcc);
+  box-shadow: 
+    0 0 20px rgba(255, 255, 102, 0.8),
+    0 0 35px rgba(255, 255, 51, 0.6),
+    0 0 50px rgba(255, 255, 0, 0.4);
+}
+
+.particle:nth-child(5n+4) {
+  background: linear-gradient(to right, #ffffff, #e6ccff);
+  box-shadow: 
+    0 0 20px rgba(153, 102, 255, 0.8),
+    0 0 35px rgba(128, 51, 255, 0.6),
+    0 0 50px rgba(102, 0, 255, 0.4);
+}
+
+/* Увеличенные размеры частиц */
+.particle:nth-child(1) { width: 8px; height: 8px; left: 10%; top: 20%; animation: sparkFloat1 6s infinite ease-out; }
+.particle:nth-child(2) { width: 12px; height: 12px; left: 20%; top: 40%; animation: sparkFloat2 5s infinite ease-out; }
+.particle:nth-child(3) { width: 10px; height: 10px; left: 30%; top: 60%; animation: sparkFloat1 7s infinite ease-out; }
+.particle:nth-child(4) { width: 14px; height: 14px; left: 40%; top: 80%; animation: sparkFloat2 6.5s infinite ease-out; }
+.particle:nth-child(5) { width: 10px; height: 10px; left: 50%; top: 25%; animation: sparkFloat1 5.5s infinite ease-out; }
+.particle:nth-child(6) { width: 12px; height: 12px; left: 60%; top: 45%; animation: sparkFloat2 6s infinite ease-out; }
+.particle:nth-child(7) { width: 8px; height: 8px; left: 70%; top: 65%; animation: sparkFloat1 6.5s infinite ease-out; }
+.particle:nth-child(8) { width: 14px; height: 14px; left: 80%; top: 85%; animation: sparkFloat2 5.5s infinite ease-out; }
+/* Увеличенные размеры и более заметные искры */
+.particle:nth-child(1) { width: 4px; height: 4px; left: 10%; top: 20%; animation: sparkFloat1 4s infinite ease-out; }
+.particle:nth-child(2) { width: 6px; height: 6px; left: 20%; top: 40%; animation: sparkFloat2 3s infinite ease-out; }
+.particle:nth-child(3) { width: 5px; height: 5px; left: 30%; top: 60%; animation: sparkFloat1 5s infinite ease-out; }
+.particle:nth-child(4) { width: 7px; height: 7px; left: 40%; top: 80%; animation: sparkFloat2 4.5s infinite ease-out; }
+.particle:nth-child(5) { width: 5px; height: 5px; left: 50%; top: 25%; animation: sparkFloat1 3.5s infinite ease-out; }
+.particle:nth-child(6) { width: 6px; height: 6px; left: 60%; top: 45%; animation: sparkFloat2 4s infinite ease-out; }
+.particle:nth-child(7) { width: 4px; height: 4px; left: 70%; top: 65%; animation: sparkFloat1 4.5s infinite ease-out; }
+.particle:nth-child(8) { width: 7px; height: 7px; left: 80%; top: 85%; animation: sparkFloat2 3.5s infinite ease-out; }
+.particle:nth-child(9) { width: 5px; height: 5px; left: 90%; top: 30%; animation: sparkFloat1 5s infinite ease-out; }
+.particle:nth-child(10) { width: 6px; height: 6px; left: 15%; top: 50%; animation: sparkFloat2 4s infinite ease-out; }
+
+/* Новые анимации для более реалистичных искр */
+@keyframes sparkFloat1 {
   0% {
-    transform: translateX(-100%);
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(-10px) translateX(10px) scale(1.2);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-50px) translateX(30px) scale(0.8);
+  }
+  90% {
+    opacity: 0.4;
+    transform: translateY(-100px) translateX(50px) scale(0.4);
   }
   100% {
-    transform: translateX(100%);
+    transform: translateY(-150px) translateX(70px) scale(0);
+    opacity: 0;
   }
 }
 
-/* Добавим стили для разных цветов кнопок */
-.game-card-button-red {
-  background: linear-gradient(45deg, rgba(255, 71, 71, 0.9), rgba(255, 71, 71, 0.7)) !important;
-}
-
-.game-card-button-gold {
-  background: linear-gradient(45deg, rgba(255, 215, 0, 0.9), rgba(255, 215, 0, 0.7)) !important;
-}
-
-.game-card-button-purple {
-  background: linear-gradient(45deg, rgba(163, 71, 255, 0.9), rgba(163, 71, 255, 0.7)) !important;
-}
-
-.game-card-button-blue {
-  background: linear-gradient(45deg, rgba(71, 191, 255, 0.9), rgba(71, 191, 255, 0.7)) !important;
-}
-
-/* Стили для кнопок с градиентом и эффектами */
-:where(.play-button-red),
-:where(.play-button-gold),
-:where(.play-button-purple),
-:where(.play-button-blue) {
-  padding: 0px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.2px;
-  cursor: pointer;
-  position: absolute;
-  bottom: 15px;
-  width: auto;
-  min-width: 80px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2.5px solid;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
-/* Красная кнопка */
-.play-button-red {
-  background: #1a0f0f;  /* темно-красный фон */
-  border-color: #ff4935;
-  color: #ff4935;
-  text-shadow: 0 0 5px rgba(255, 73, 53, 0.7);
-  box-shadow: 
-    0 0 5px rgba(255, 73, 53, 0.3),
-    inset 0 0 5px rgba(255, 73, 53, 0.3);
-}
-
-/* Золотая кнопка */
-.play-button-gold {
-  background: #1a1810;  /* темно-золотой фон */
-  border-color: #ffd700;
-  color: #ffd700;
-  text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
-  box-shadow: 
-    0 0 5px rgba(255, 215, 0, 0.3),
-    inset 0 0 5px rgba(255, 215, 0, 0.3);
-}
-
-/* Фиолетовая кнопка */
-.play-button-purple {
-  background: #150f1a;  /* темно-фиолетовый фон */
-  border-color: #9b30ff;
-  color: #9b30ff;
-  text-shadow: 0 0 5px rgba(155, 48, 255, 0.7);
-  box-shadow: 
-    0 0 5px rgba(155, 48, 255, 0.3),
-    inset 0 0 5px rgba(155, 48, 255, 0.3);
-}
-
-/* Синяя кнопка */
-.play-button-blue {
-  background: #0f141a;  /* темно-синий фон */
-  border-color: #00bfff;
-  color: #00bfff;
-  text-shadow: 0 0 5px rgba(0, 191, 255, 0.7);
-  box-shadow: 
-    0 0 5px rgba(0, 191, 255, 0.3),
-    inset 0 0 5px rgba(0, 191, 255, 0.3);
-}
-
-/* Медиа-запрос для больших экранов */
-@media screen and (min-width: 390px) {
-  :where(.play-button-red),
-  :where(.play-button-gold),
-  :where(.play-button-purple),
-  :where(.play-button-blue) {
-    font-size: 15px;
-    height: 36px;
-    max-width: 150px;
+@keyframes sparkFloat2 {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(-15px) translateX(-10px) scale(1.2);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-70px) translateX(-30px) scale(0.8);
+  }
+  90% {
+    opacity: 0.4;
+    transform: translateY(-120px) translateX(-50px) scale(0.4);
+  }
+  100% {
+    transform: translateY(-170px) translateX(-70px) scale(0);
+    opacity: 0;
   }
 }
 
-/* Добавляем переменные для цветов свечения */
-.play-button-red {
-  --glow-color: 255, 59, 48;
-}
-
-.play-button-gold {
-  --glow-color: 255, 149, 0;
-}
-
-.play-button-purple {
-  --glow-color: 175, 82, 222;
-}
-
-.play-button-blue {
-  --glow-color: 0, 122, 255;
-}
-
-/* Добавляем эффект блика */
-.play-button-red::after,
-.play-button-gold::after,
-.play-button-purple::after,
-.play-button-blue::after {
+/* Улучшенное свечение для частиц */
+.particle::after {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
-  transform: rotate(45deg);
-  animation: shine 3s infinite;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  filter: blur(5px);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(230, 230, 255, 0.4), transparent);
+  opacity: 0.6;
 }
 
-/* Удаляем старую анимацию RGB-границы */
-@keyframes rgbBorder {
-  /* Удалить или закомментировать старую анимацию */
+/* Разные цвета для более реалистичных искр */
+.particle:nth-child(3n) {
+  background: linear-gradient(to right, #ffffff, #e6e6ff);
+  box-shadow: 
+    0 0 15px rgba(255, 255, 255, 0.6),
+    0 0 25px rgba(230, 230, 255, 0.4),
+    0 0 35px rgba(204, 204, 255, 0.2);
 }
 
-/* Для iPhone Pro Max и больших экранов */
-@media screen and (min-width: 428px) {
-  .main-logo {
-    width: 240px;
-    margin-bottom: 45px;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4))
-           drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+.particle:nth-child(3n+1) {
+  background: linear-gradient(to right, #e6e6ff, #ccccff);
+  box-shadow: 
+    0 0 15px rgba(230, 230, 255, 0.6),
+    0 0 25px rgba(204, 204, 255, 0.4),
+    0 0 35px rgba(179, 179, 255, 0.2);
+}
+
+.particle:nth-child(3n+2) {
+  background: linear-gradient(to right, #ccccff, #b3b3ff);
+  box-shadow: 
+    0 0 15px rgba(204, 204, 255, 0.6),
+    0 0 25px rgba(179, 179, 255, 0.4),
+    0 0 35px rgba(153, 153, 255, 0.2);
+}
+
+/* Разные задержки для более естественного эффекта */
+.particle:nth-child(2n) { animation-delay: -1s; }
+.particle:nth-child(3n) { animation-delay: -2s; }
+.particle:nth-child(5n) { animation-delay: -3s; }
+.particle:nth-child(7n) { animation-delay: -4s; }
+
+/* Контейнер для частиц */
+.sparkles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Стили для частиц */
+.spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(to right, #ffffff, #ffcccc);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 10px #ff9999,
+    0 0 20px #ff8080,
+    0 0 30px #ff6666;
+  animation: sparkFloat 4s ease-out infinite;
+  opacity: 0;
+}
+
+/* Анимация для частиц */
+@keyframes sparkFloat {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(50px) scale(0);
+    opacity: 0;
   }
 }
 
-/* Удаляем все псевдоэлементы, которые могли создавать полоски */
-.play-button-red::before,
-.play-button-gold::before,
-.play-button-purple::before,
-.play-button-blue::before,
-.play-button-red::after,
-.play-button-gold::after,
-.play-button-purple::after,
-.play-button-blue::after {
-  display: none;
-  content: none;
+/* Обеспечивм правиль��ое позиционирование контента */
+.container {
+  position: relative;
+  z-index: 2; /* Выше астиц */
 }
 
-.animated-background {
-  background: linear-gradient(
-    238.72deg,
-    #8B0000 0%,      /* темно-красный */
-    #800080 30.46%,  /* фиолетовый */
-    #4B0082 60.93%,  /* индиго */
-    #8B0000 100%     /* темно-красный */
-  );
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+.header {
+  position: relative;
+  z-index: 2;
 }
 
-/* Добавляем специальный стиль для карточки с желтой кнопкой */
-.game-card:nth-child(2) {
-  height: 280px;  /* уменьшенная высота для карточки с желтой кнопкой */
+.main {
+  position: relative;
+  z-index: 2;
 }
 
-/* Обновляем медиа-запрос для больших экранов */
-@media screen and (min-width: 390px) and (min-height: 844px) {
-  .game-card {
-    height: 340px;
+/* Убедимся, что все элементы видны поверх частиц */
+.game-cards {
+  position: relative;
+  z-index: 2;
+}
+
+.welcome-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Анимация радужного свечения */
+@keyframes rainbowGlow {
+  0% {
+    filter: drop-shadow(0 0 15px #ff0000) 
+            drop-shadow(0 0 30px #ff0000);
   }
-  
-  .game-card:nth-child(2) {
-    height: 300px;  /* уменьшенная высота для желтой карточки на больших экранах */
+  33% {
+    filter: drop-shadow(0 0 15px #ff00ff) 
+            drop-shadow(0 0 30px #ff00ff);
+  }
+  66% {
+    filter: drop-shadow(0 0 15px #0000ff) 
+            drop-shadow(0 0 30px #0000ff);
+  }
+  100% {
+    filter: drop-shadow(0 0 15px #ff0000) 
+            drop-shadow(0 0 30px #ff0000);
   }
 }
+
+/* Добавляем отступ для первой карточки */
+.game-card:first-child {
+  margin-top: 20px;
+}
+
+/* Новая RGB анимация свечения */
+@keyframes rgbGlow {
+  0% {
+    filter: drop-shadow(0 0 15px #ff0000) 
+            drop-shadow(0 0 30px #ff0000);
+  }
+  33% {
+    filter: drop-shadow(0 0 15px #0000ff) 
+            drop-shadow(0 0 30px #0000ff);
+  }
+  66% {
+    filter: drop-shadow(0 0 15px #ff00ff) 
+            drop-shadow(0 0 30px #ff00ff);
+  }
+  100% {
+    filter: drop-shadow(0 0 15px #ff0000) 
+            drop-shadow(0 0 30px #ff0000);
+  }
+}
+
+/* Стили для частиц с разными цветами */
+.particle:nth-child(5n) {
+  background: linear-gradient(to right, #ffffff, #ffcccc);
+  box-shadow: 
+    0 0 15px rgba(255, 102, 102, 0.6),
+    0 0 25px rgba(255, 51, 51, 0.4),
+    0 0 35px rgba(255, 0, 0, 0.2);
+}
+
+.particle:nth-child(5n+1) {
+  background: linear-gradient(to right, #ffffff, #ccffcc);
+  box-shadow: 
+    0 0 15px rgba(102, 255, 102, 0.6),
+    0 0 25px rgba(51, 255, 51, 0.4),
+    0 0 35px rgba(0, 255, 0, 0.2);
+}
+
+.particle:nth-child(5n+2) {
+  background: linear-gradient(to right, #ffffff, #cce6ff);
+  box-shadow: 
+    0 0 15px rgba(102, 178, 255, 0.6),
+    0 0 25px rgba(51, 153, 255, 0.4),
+    0 0 35px rgba(0, 128, 255, 0.2);
+}
+
+.particle:nth-child(5n+3) {
+  background: linear-gradient(to right, #ffffff, #ffccff);
+  box-shadow: 
+    0 0 15px rgba(255, 102, 255, 0.6),
+    0 0 25px rgba(255, 51, 255, 0.4),
+    0 0 35px rgba(255, 0, 255, 0.2);
+}
+
+.particle:nth-child(5n+4) {
+  background: linear-gradient(to right, #ffffff, #ffffcc);
+  box-shadow: 
+    0 0 15px rgba(255, 255, 102, 0.6),
+    0 0 25px rgba(255, 255, 51, 0.4),
+    0 0 35px rgba(255, 255, 0, 0.2);
+}
+
+/* Увеличим количество частиц */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Добавим больше разнообразия в анимацию */
+@keyframes sparkFloat1 {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(-10px) translateX(10px) scale(1.2);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-50px) translateX(30px) scale(0.8);
+  }
+  90% {
+    opacity: 0.4;
+    transform: translateY(-100px) translateX(50px) scale(0.4);
+  }
+  100% {
+    transform: translateY(-150px) translateX(70px) scale(0);
+    opacity: 0;
+  }
+}
+
+
+
+
+

@@ -7,45 +7,66 @@ import image4 from "../assets/image4.png";
 import image5 from "../assets/image5.png";
 import './MainPage.css';
 
+const games = [
+  {
+    id: 1,
+    image: image2,
+    title: "Lucky Jet",
+    link: "/game1",
+    theme: "red"
+  },
+  {
+    id: 2,
+    image: image5,
+    title: "JetX",
+    link: "/game3",
+    theme: "gold"
+  },
+  {
+    id: 3,
+    image: image4,
+    title: "Space X",
+    link: "/game2",
+    theme: "purple"
+  },
+  {
+    id: 4,
+    image: image3,
+    title: "Rocket Queen",
+    link: "/game4",
+    theme: "blue"
+  }
+];
+
 const MainPage = () => {
   return (
-    <div className="main-container">
-      <img 
-        src={image1win} 
-        alt="1Win Logo" 
-        className="main-logo"
-      />
-  
-      <div className="games-grid">
-        <GameCard
-          image={image2}
-          altText="Lucky Jet"
-          buttonText="Play Now"
-          gameLink="/game1"
-          bgColor="rgba(255, 71, 71, 0.8)"
-        />
-        <GameCard
-          image={image3}
-          altText="JetX"
-          buttonText="Play Now"
-          gameLink="/game2"
-          bgColor="rgba(255, 215, 0, 0.8)"
-          style={{ width: "280px", height: "280px" }}
-        />
-        <GameCard
-          image={image5}
-          altText="Rocket Queen"
-          buttonText="Play Now"
-          gameLink="/game3"
-          bgColor="rgba(163, 71, 255, 0.8)"
-        />
-        <GameCard
-          image={image4}
-          altText="Space X"
-          buttonText="Play Now"
-          gameLink="/game4"
-          bgColor="rgba(71, 191, 255, 0.8)"
-        />
+    <div className="root">
+      <div className="particles">
+        {[...Array(15)].map((_, index) => (
+          <div key={index} className="particle" />
+        ))}
+      </div>
+      
+      <div className="container">
+        <header className="header">
+          <img 
+            src={image1win} 
+            alt="1win signals" 
+            className="header__logo"
+          />
+        </header>
+        
+        <main className="main">
+          {games.map((game) => (
+            <GameCard
+              key={game.id}
+              image={game.image}
+              title={game.title}
+              link={game.link}
+              theme={game.theme}
+            />
+          ))}
+        </main>
       </div>
     </div>
   );
