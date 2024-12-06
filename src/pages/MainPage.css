@@ -1,549 +1,202 @@
-:root {
-  --color-background: #2b1b2d;
-  --spacing-base: clamp(4px, 1vw, 16px);
-  --image-size: clamp(350px, 45vw, 550px);
-}
-
 .root {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: calc(var(--spacing-base) * 2);
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(45deg, 
-    #0a0014,
-    #130029, 
-    #1a003d, 
-    #20004d, 
-    #2a0066,
-    #20004d,
-    #1a003d
-  );
+  background: linear-gradient(135deg, rgba(255, 0, 0, 0.5), rgba(255, 127, 0, 0.5), rgba(0, 0, 255, 0.5), rgba(75, 0, 130, 0.5), rgba(148, 0, 211, 0.5));
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  animation: gradientAnimation 15s ease infinite;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
 }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.root::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.logo {
+  width: 300px;
+  margin-bottom: 20px; /* Отступ снизу для логотипа */
+  position: relative;
+  overflow: hidden;
+}
+
+.logo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background: rgba(0, 255, 157, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover::before {
+  opacity: 1;
+}
+
+@keyframes glow {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .container {
-  position: relative;
-  z-index: 2;
-  width: min(90vw, 2600px);
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  padding-top: calc(var(--image-size) - 267px);
-  margin-left: -20px;
-}
-
-.welcome-text {
-  font-size: clamp(24px, 4vw, 48px);
-  color: white;
-  text-align: center;
-  margin: calc(var(--spacing-base) * 4) 0;
-  font-weight: 600;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-  letter-spacing: 1px;
-  position: relative;
-  z-index: 2;
-}
-
-.header {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  position: absolute;
-  top: -80px;
-  left: 0px;
-  padding-top: 20px;
-  z-index: 3;
-}
-
-.header__logo {
-  width: clamp(180px, 35vw, 380px);
-  height: auto;
-  object-fit: contain;
-  animation: logoFloat 3s ease-in-out infinite;
-  margin-left: 0px;
-  margin-top: -50px;
-  opacity: 1;
-  filter: drop-shadow(0 0 10px #ffffff) 
-          drop-shadow(0 0 20px #ffffff)
-          drop-shadow(0 0 30px #ffffff);
-  z-index: 3;
-}
-
-@keyframes logoFloat {
-  0% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-5px) rotate(1deg); }
-  75% { transform: translateY(5px) rotate(-1deg); }
-  100% { transform: translateY(0) rotate(0deg); }
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10px;
+  margin-top: 70px; /* Увеличьте отступ сверху для контейнера */
 }
 
 .main {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0px;
-  width: 100%;
-  margin-left: -20px;
-  transform: scale(0.95);
-}
-
-@media (min-width: 2556px) {
-  :root {
-    --spacing-base: clamp(8px, 0.5vw, 24px);
-  }
-  
-  .main {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 2800px;
-    margin: 0 auto;
-  }
-  
-  .game-card {
-    max-width: 600px;
-  }
-  
-  .container {
-    margin-left: -100px;
-  }
-  
-  .main {
-    margin-left: -100px;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; /* Отступы между карточками */
+  padding: 10px;
 }
 
 .game-card {
-  margin-bottom: 0;
-  padding: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-  margin-left: -20px;
-  transform: scale(0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: slideIn 0.5s ease forwards; /* Анимация появления карточек */
 }
 
-.game-card:first-child {
-  margin-left: 0;
-  margin: 20px auto 0;
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px); /* Начальная позиция ниже */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Конечная позиция */
+  }
 }
 
-/* Обновляем стили для изображений */
 .game-card img {
-  width: var(--image-size);
-  height: var(--image-size);
-  object-fit: cover;
-  margin: 0;
-  padding: 0;
-  animation: float1 3s ease-in-out infinite,
-             rgbGlow 8s linear infinite;
-  opacity: 1;
-}
-
-/* Разные анимации плавания */
-@keyframes float1 {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0); }
-}
-
-@keyframes float2 {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(2deg); }
-  100% { transform: translateY(0) rotate(0deg); }
-}
-
-@keyframes float3 {
-  0% { transform: translateY(0) rotate(0deg); }
-  33% { transform: translateY(-8px) rotate(-1deg); }
-  66% { transform: translateY(8px) rotate(1deg); }
-  100% { transform: translateY(0) rotate(0deg); }
-}
-
-@keyframes float4 {
-  0% { transform: translateY(0); }
-  25% { transform: translateY(-12px); }
-  75% { transform: translateY(8px); }
-  100% { transform: translateY(0); }
-}
-
-/* Добавляем контейнер для частиц */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
+  height: auto;
+  border-radius: 20px;
+  margin-bottom: 10px;
 }
 
-/* Стили для частиц */
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.8;
+.game-title {
+  color: white;
+  font-size: 18px;
+  margin: 8px 0;
 }
 
-.particle:nth-child(5n) {
-  background: linear-gradient(to right, #ffffff, #ffcccc);
-  box-shadow: 
-    0 0 20px rgba(255, 102, 102, 0.8),
-    0 0 35px rgba(255, 51, 51, 0.6),
-    0 0 50px rgba(255, 0, 0, 0.4);
+.open-button {
+  background: rgba(255, 255, 255, 0.1); /* Полупрозрачный матовый фон */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Полупрозрачная граница */
+  border-radius: 25px;
+  padding: 10px 40px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  margin-top: 5px;
+  width: 80%;
+  backdrop-filter: blur(10px); /* Эффект размытия фона */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Плавный переход */
 }
 
-.particle:nth-child(5n+1) {
-  background: linear-gradient(to right, #ffffff, #cce6ff);
-  box-shadow: 
-    0 0 20px rgba(102, 178, 255, 0.8),
-    0 0 35px rgba(51, 153, 255, 0.6),
-    0 0 50px rgba(0, 128, 255, 0.4);
+/* Эффект нажатия */
+.open-button:active {
+  transform: scale(0.95); /* Уменьшение размера при нажатии */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Эффект свечения */
 }
 
-.particle:nth-child(5n+2) {
-  background: linear-gradient(to right, #ffffff, #ffccff);
-  box-shadow: 
-    0 0 20px rgba(255, 102, 255, 0.8),
-    0 0 35px rgba(255, 51, 255, 0.6),
-    0 0 50px rgba(255, 0, 255, 0.4);
+/* Базовое свечение при наведении */
+.open-button:hover {
+  background: rgba(255, 255, 255, 0.2); /* Увеличение прозрачности при наведении */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); /* Эффект свечения */
 }
 
-.particle:nth-child(5n+3) {
-  background: linear-gradient(to right, #ffffff, #ffffcc);
-  box-shadow: 
-    0 0 20px rgba(255, 255, 102, 0.8),
-    0 0 35px rgba(255, 255, 51, 0.6),
-    0 0 50px rgba(255, 255, 0, 0.4);
+/* Анимация нажатия */
+.open-button:active {
+  animation: buttonPress 0.2s ease; /* Анимация нажатия */
 }
 
-.particle:nth-child(5n+4) {
-  background: linear-gradient(to right, #ffffff, #e6ccff);
-  box-shadow: 
-    0 0 20px rgba(153, 102, 255, 0.8),
-    0 0 35px rgba(128, 51, 255, 0.6),
-    0 0 50px rgba(102, 0, 255, 0.4);
-}
-
-/* Увеличенные размеры частиц */
-.particle:nth-child(1) { width: 8px; height: 8px; left: 10%; top: 20%; animation: sparkFloat1 6s infinite ease-out; }
-.particle:nth-child(2) { width: 12px; height: 12px; left: 20%; top: 40%; animation: sparkFloat2 5s infinite ease-out; }
-.particle:nth-child(3) { width: 10px; height: 10px; left: 30%; top: 60%; animation: sparkFloat1 7s infinite ease-out; }
-.particle:nth-child(4) { width: 14px; height: 14px; left: 40%; top: 80%; animation: sparkFloat2 6.5s infinite ease-out; }
-.particle:nth-child(5) { width: 10px; height: 10px; left: 50%; top: 25%; animation: sparkFloat1 5.5s infinite ease-out; }
-.particle:nth-child(6) { width: 12px; height: 12px; left: 60%; top: 45%; animation: sparkFloat2 6s infinite ease-out; }
-.particle:nth-child(7) { width: 8px; height: 8px; left: 70%; top: 65%; animation: sparkFloat1 6.5s infinite ease-out; }
-.particle:nth-child(8) { width: 14px; height: 14px; left: 80%; top: 85%; animation: sparkFloat2 5.5s infinite ease-out; }
-/* Увеличенные размеры и более заметные искры */
-.particle:nth-child(1) { width: 4px; height: 4px; left: 10%; top: 20%; animation: sparkFloat1 4s infinite ease-out; }
-.particle:nth-child(2) { width: 6px; height: 6px; left: 20%; top: 40%; animation: sparkFloat2 3s infinite ease-out; }
-.particle:nth-child(3) { width: 5px; height: 5px; left: 30%; top: 60%; animation: sparkFloat1 5s infinite ease-out; }
-.particle:nth-child(4) { width: 7px; height: 7px; left: 40%; top: 80%; animation: sparkFloat2 4.5s infinite ease-out; }
-.particle:nth-child(5) { width: 5px; height: 5px; left: 50%; top: 25%; animation: sparkFloat1 3.5s infinite ease-out; }
-.particle:nth-child(6) { width: 6px; height: 6px; left: 60%; top: 45%; animation: sparkFloat2 4s infinite ease-out; }
-.particle:nth-child(7) { width: 4px; height: 4px; left: 70%; top: 65%; animation: sparkFloat1 4.5s infinite ease-out; }
-.particle:nth-child(8) { width: 7px; height: 7px; left: 80%; top: 85%; animation: sparkFloat2 3.5s infinite ease-out; }
-.particle:nth-child(9) { width: 5px; height: 5px; left: 90%; top: 30%; animation: sparkFloat1 5s infinite ease-out; }
-.particle:nth-child(10) { width: 6px; height: 6px; left: 15%; top: 50%; animation: sparkFloat2 4s infinite ease-out; }
-
-/* Новые анимации для более реалистичных искр */
-@keyframes sparkFloat1 {
+@keyframes buttonPress {
   0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-    transform: translateY(-10px) translateX(10px) scale(1.2);
+    transform: scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: translateY(-50px) translateX(30px) scale(0.8);
-  }
-  90% {
-    opacity: 0.4;
-    transform: translateY(-100px) translateX(50px) scale(0.4);
+    transform: scale(0.95); /* Уменьшение размера */
   }
   100% {
-    transform: translateY(-150px) translateX(70px) scale(0);
-    opacity: 0;
+    transform: scale(1); /* Возврат к исходному размеру */
   }
 }
 
-@keyframes sparkFloat2 {
-  0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-    transform: translateY(-15px) translateX(-10px) scale(1.2);
-  }
-  50% {
-    opacity: 0.8;
-    transform: translateY(-70px) translateX(-30px) scale(0.8);
-  }
-  90% {
-    opacity: 0.4;
-    transform: translateY(-120px) translateX(-50px) scale(0.4);
-  }
-  100% {
-    transform: translateY(-170px) translateX(-70px) scale(0);
-    opacity: 0;
-  }
+/* Добавляем эффект свечения для карточек */
+.game-card {
+  position: relative;
 }
 
-/* Улучшенное свечение для частиц */
-.particle::after {
+.game-card::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 300%;
-  height: 300%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  filter: blur(5px);
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(230, 230, 255, 0.4), transparent);
-  opacity: 0.6;
-}
-
-/* Разные цвета для более реалистичных искр */
-.particle:nth-child(3n) {
-  background: linear-gradient(to right, #ffffff, #e6e6ff);
-  box-shadow: 
-    0 0 15px rgba(255, 255, 255, 0.6),
-    0 0 25px rgba(230, 230, 255, 0.4),
-    0 0 35px rgba(204, 204, 255, 0.2);
-}
-
-.particle:nth-child(3n+1) {
-  background: linear-gradient(to right, #e6e6ff, #ccccff);
-  box-shadow: 
-    0 0 15px rgba(230, 230, 255, 0.6),
-    0 0 25px rgba(204, 204, 255, 0.4),
-    0 0 35px rgba(179, 179, 255, 0.2);
-}
-
-.particle:nth-child(3n+2) {
-  background: linear-gradient(to right, #ccccff, #b3b3ff);
-  box-shadow: 
-    0 0 15px rgba(204, 204, 255, 0.6),
-    0 0 25px rgba(179, 179, 255, 0.4),
-    0 0 35px rgba(153, 153, 255, 0.2);
-}
-
-/* Разные задержки для более естественного эффекта */
-.particle:nth-child(2n) { animation-delay: -1s; }
-.particle:nth-child(3n) { animation-delay: -2s; }
-.particle:nth-child(5n) { animation-delay: -3s; }
-.particle:nth-child(7n) { animation-delay: -4s; }
-
-/* Контейнер для частиц */
-.sparkles {
-  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
   pointer-events: none;
-  z-index: 1;
 }
 
-/* Стили для частиц */
-.spark {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(to right, #ffffff, #ffcccc);
-  border-radius: 50%;
-  box-shadow: 
-    0 0 10px #ff9999,
-    0 0 20px #ff8080,
-    0 0 30px #ff6666;
-  animation: sparkFloat 4s ease-out infinite;
-  opacity: 0;
-}
-
-/* Анимация для частиц */
-@keyframes sparkFloat {
-  0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0;
+/* Медиа-зпрос для мобильных устройств */
+@media screen and (max-width: 430px) {
+  .main {
+    gap: 15px;
+    padding: 5px;
   }
-  10% {
-    opacity: 1;
+  
+  .game-card img {
+    border-radius: 15px;
   }
-  90% {
-    opacity: 1;
+  
+  .game-title {
+    font-size: 16px;
   }
-  100% {
-    transform: translateY(-100px) translateX(50px) scale(0);
-    opacity: 0;
+  
+  .open-button {
+    padding: 8px 30px;
+    font-size: 14px;
   }
 }
-
-/* Обеспечивм правиль��ое позиционирование контента */
-.container {
-  position: relative;
-  z-index: 2; /* Выше астиц */
-}
-
-.header {
-  position: relative;
-  z-index: 2;
-}
-
-.main {
-  position: relative;
-  z-index: 2;
-}
-
-/* Убедимся, что все элементы видны поверх частиц */
-.game-cards {
-  position: relative;
-  z-index: 2;
-}
-
-.welcome-text {
-  position: relative;
-  z-index: 2;
-}
-
-/* Анимация радужного свечения */
-@keyframes rainbowGlow {
-  0% {
-    filter: drop-shadow(0 0 15px #ff0000) 
-            drop-shadow(0 0 30px #ff0000);
-  }
-  33% {
-    filter: drop-shadow(0 0 15px #ff00ff) 
-            drop-shadow(0 0 30px #ff00ff);
-  }
-  66% {
-    filter: drop-shadow(0 0 15px #0000ff) 
-            drop-shadow(0 0 30px #0000ff);
-  }
-  100% {
-    filter: drop-shadow(0 0 15px #ff0000) 
-            drop-shadow(0 0 30px #ff0000);
-  }
-}
-
-/* Добавляем отступ для первой карточки */
-.game-card:first-child {
-  margin-top: 20px;
-}
-
-/* Новая RGB анимация свечения */
-@keyframes rgbGlow {
-  0% {
-    filter: drop-shadow(0 0 15px #ff0000) 
-            drop-shadow(0 0 30px #ff0000);
-  }
-  33% {
-    filter: drop-shadow(0 0 15px #0000ff) 
-            drop-shadow(0 0 30px #0000ff);
-  }
-  66% {
-    filter: drop-shadow(0 0 15px #ff00ff) 
-            drop-shadow(0 0 30px #ff00ff);
-  }
-  100% {
-    filter: drop-shadow(0 0 15px #ff0000) 
-            drop-shadow(0 0 30px #ff0000);
-  }
-}
-
-/* Стили для частиц с разными цветами */
-.particle:nth-child(5n) {
-  background: linear-gradient(to right, #ffffff, #ffcccc);
-  box-shadow: 
-    0 0 15px rgba(255, 102, 102, 0.6),
-    0 0 25px rgba(255, 51, 51, 0.4),
-    0 0 35px rgba(255, 0, 0, 0.2);
-}
-
-.particle:nth-child(5n+1) {
-  background: linear-gradient(to right, #ffffff, #ccffcc);
-  box-shadow: 
-    0 0 15px rgba(102, 255, 102, 0.6),
-    0 0 25px rgba(51, 255, 51, 0.4),
-    0 0 35px rgba(0, 255, 0, 0.2);
-}
-
-.particle:nth-child(5n+2) {
-  background: linear-gradient(to right, #ffffff, #cce6ff);
-  box-shadow: 
-    0 0 15px rgba(102, 178, 255, 0.6),
-    0 0 25px rgba(51, 153, 255, 0.4),
-    0 0 35px rgba(0, 128, 255, 0.2);
-}
-
-.particle:nth-child(5n+3) {
-  background: linear-gradient(to right, #ffffff, #ffccff);
-  box-shadow: 
-    0 0 15px rgba(255, 102, 255, 0.6),
-    0 0 25px rgba(255, 51, 255, 0.4),
-    0 0 35px rgba(255, 0, 255, 0.2);
-}
-
-.particle:nth-child(5n+4) {
-  background: linear-gradient(to right, #ffffff, #ffffcc);
-  box-shadow: 
-    0 0 15px rgba(255, 255, 102, 0.6),
-    0 0 25px rgba(255, 255, 51, 0.4),
-    0 0 35px rgba(255, 255, 0, 0.2);
-}
-
-/* Увеличим количество частиц */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-/* Добавим больше разнообразия в анимацию */
-@keyframes sparkFloat1 {
-  0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-    transform: translateY(-10px) translateX(10px) scale(1.2);
-  }
-  50% {
-    opacity: 0.8;
-    transform: translateY(-50px) translateX(30px) scale(0.8);
-  }
-  90% {
-    opacity: 0.4;
-    transform: translateY(-100px) translateX(50px) scale(0.4);
-  }
-  100% {
-    transform: translateY(-150px) translateX(70px) scale(0);
-    opacity: 0;
-  }
-}
-
-
-
-
-

@@ -7,12 +7,18 @@ import './GamePage.css';
 const GamePageLuckyJet = () => {
   const [number, setNumber] = useState(1.00);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const navigate = useNavigate();
 
   const startAnimation = () => {
     setIsAnimating(true);
+    setIsButtonDisabled(true);
     setNumber(1.00);
     
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 7000);
+
     const count = parseInt(localStorage.getItem("pageCount")) || 0;
     const newCount = count + 1;
     localStorage.setItem("pageCount", newCount);
@@ -155,15 +161,15 @@ const GamePageLuckyJet = () => {
       padding: 'clamp(12px, 3vw, 24px) clamp(24px, 5vw, 48px)',
       fontSize: 'clamp(14px, 3.5vw, 28px)',
       fontWeight: '700',
-      cursor: 'pointer',
+      cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
       transition: 'all 0.3s ease',
       boxShadow: '0 0 15px rgba(255, 51, 51, 0.3)',
       letterSpacing: '1px',
-      opacity: isAnimating ? 0.7 : 1,
-      pointerEvents: isAnimating ? 'none' : 'auto',
+      opacity: isButtonDisabled ? 0.5 : 1,
+      pointerEvents: isButtonDisabled ? 'none' : 'auto',
       '&:hover': {
-        backgroundColor: 'rgba(255, 51, 51, 0.1)',
-        boxShadow: '0 0 20px rgba(255, 51, 51, 0.5)',
+        backgroundColor: isButtonDisabled ? 'transparent' : 'rgba(255, 51, 51, 0.1)',
+        boxShadow: isButtonDisabled ? '0 0 15px rgba(255, 51, 51, 0.3)' : '0 0 20px rgba(255, 51, 51, 0.5)',
       },
     },
 
@@ -175,6 +181,16 @@ const GamePageLuckyJet = () => {
       marginBottom: 'clamp(15px, 4vw, 30px)',
       marginLeft: '-5%',
     },
+
+    particles: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      pointerEvents: 'none',
+      zIndex: 1,
+    }
   };
 
   const keyframes = `
@@ -189,12 +205,56 @@ const GamePageLuckyJet = () => {
         background-position: 0% 50%;
       }
     }
+    
+    @keyframes moveUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+      }
+    }
   `;
+
+  const Particles = () => {
+    return (
+      <div style={{ 
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%', 
+        height: '100%', 
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}>
+        {Array.from({ length: 50 }).map((_, index) => (
+          <div
+            key={index}
+            style={{
+              position: 'absolute',
+              left: `${Math.random() * 100}%`,
+              bottom: '-2px',
+              width: '3px',
+              height: '3px',
+              backgroundColor: `rgba(255, ${Math.random() * 100 + 100}, 0, ${Math.random() * 0.5 + 0.5})`,
+              borderRadius: '50%',
+              animation: `moveUp ${2 + Math.random() * 2}s linear infinite`,
+              animationDelay: `${Math.random() * 2}s`,
+              pointerEvents: 'none'
+            }}
+          />
+        ))}
+      </div>
+    );
+  };
 
   return (
     <>
       <style>{keyframes}</style>
       <div style={styles.container}>
+        <Particles />
         <button 
           style={styles.backButton}
           onClick={() => navigate(-1)}
@@ -225,11 +285,16 @@ const GamePageLuckyJet = () => {
         </div>
         
         <button 
-          style={styles.analyzeButton}
-          onClick={() => !isAnimating && startAnimation()}
-          disabled={isAnimating}
+          style={{
+            ...styles.analyzeButton,
+            opacity: isButtonDisabled ? 0.5 : 1,
+            cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
+            pointerEvents: isButtonDisabled ? 'none' : 'auto'
+          }}
+          onClick={startAnimation}
+          disabled={isButtonDisabled}
         >
-          ANALYZE
+          {isButtonDisabled ? "WAIT..." : "ANALYZE"}
         </button>
       </div>
     </>

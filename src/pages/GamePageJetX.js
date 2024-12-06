@@ -8,9 +8,11 @@ const GamePageJetX = () => {
   const navigate = useNavigate();
   const [number, setNumber] = useState(1.00);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const startAnimation = () => {
     setIsAnimating(true);
+    setIsButtonDisabled(true);
     setNumber(1.00);
     
     const count = parseInt(localStorage.getItem("pageCount")) || 0;
@@ -68,6 +70,14 @@ const GamePageJetX = () => {
     };
 
     intervalId = setInterval(updateNumber, intervalSpeed);
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 7000);
+
+    setTimeout(() => {
+      setIsButtonDisabled(false);
+    }, 7000);
   };
 
   const styles = {
@@ -179,18 +189,109 @@ const GamePageJetX = () => {
     },
   };
 
-  const particleStyles = {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    background: 'radial-gradient(circle at center, rgba(51, 204, 255, 0.1) 0%, transparent 70%)',
-    animation: 'pulse 4s ease-in-out infinite',
-    pointerEvents: 'none',
+  const BlueParticles = () => {
+    return (
+      <div style={{ 
+        position: 'fixed', 
+        width: '100%', 
+        height: '100%', 
+        zIndex: 1, 
+        pointerEvents: 'none'
+      }}>
+        {Array.from({ length: 40 }).map((_, index) => (
+          <div
+            key={index}
+            style={{
+              position: 'absolute',
+              left: `${Math.random() * 100}%`,
+              bottom: '-2px',
+              width: `${Math.random() * 6 + 2}px`,
+              height: `${Math.random() * 6 + 2}px`,
+              background: `radial-gradient(circle at 50% 50%, 
+                rgba(51, 204, 255, 1), 
+                rgba(51, 204, 255, 0.8), 
+                rgba(51, 204, 255, 0))`,
+              borderRadius: '50%',
+              animation: `
+                floatUpBlue ${3 + Math.random() * 4}s linear infinite,
+                glowBlue ${2 + Math.random() * 2}s ease-in-out infinite alternate
+              `,
+              animationDelay: `${Math.random() * 3}s`,
+              boxShadow: '0 0 15px rgba(51, 204, 255, 0.6)',
+              filter: 'blur(1px)',
+              pointerEvents: 'none'
+            }}
+          />
+        ))}
+      </div>
+    );
   };
+
+  const keyframes = `
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+        background-size: 400% 400%;
+      }
+      50% {
+        background-position: 100% 50%;
+        background-size: 200% 200%;
+      }
+      100% {
+        background-position: 0% 50%;
+        background-size: 400% 400%;
+      }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-13px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    @keyframes floatUpBlue {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(${Math.random() * 100 - 50}px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes glowBlue {
+      0% {
+        filter: brightness(1) blur(1px);
+        box-shadow: 0 0 15px rgba(51, 204, 255, 0.6);
+      }
+      100% {
+        filter: brightness(1.5) blur(2px);
+        box-shadow: 0 0 25px rgba(51, 204, 255, 0.8);
+      }
+    }
+  `;
+
+  const styleSheet = document.createElement("style");
+  styleSheet.innerText = keyframes;
+  document.head.appendChild(styleSheet);
 
   return (
     <div style={styles.container}>
-      <div style={particleStyles} />
+      <style>{keyframes}</style>
+      <BlueParticles />
       <div style={styles.content}>
         <button 
           style={styles.backButton}
@@ -213,48 +314,20 @@ const GamePageJetX = () => {
         </div>
 
         <button 
-          style={styles.analyzeButton}
-          onClick={() => !isAnimating && startAnimation()}
-          disabled={isAnimating}
+          style={{
+            ...styles.analyzeButton,
+            opacity: isButtonDisabled ? 0.5 : 1,
+            cursor: isButtonDisabled ? 'not-allowed' : 'pointer',
+            pointerEvents: isButtonDisabled ? 'none' : 'auto'
+          }}
+          onClick={startAnimation}
+          disabled={isButtonDisabled}
         >
-          ANALYZE
+          {isButtonDisabled ? "WAIT..." : "ANALYZE"}
         </button>
       </div>
     </div>
   );
 };
-
-const keyframes = `
-  @keyframes gradientBG {
-    0% {
-      background-position: 0% 50%;
-      background-size: 400% 400%;
-    }
-    50% {
-      background-position: 100% 50%;
-      background-size: 200% 200%;
-    }
-    100% {
-      background-position: 0% 50%;
-      background-size: 400% 400%;
-    }
-  }
-
-  @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-13px); }
-    100% { transform: translateY(0); }
-  }
-
-  @keyframes pulse {
-    0% { opacity: 0.8; }
-    50% { opacity: 1; }
-    100% { opacity: 0.8; }
-  }
-`;
-
-const styleSheet = document.createElement("style");
-styleSheet.innerText = keyframes;
-document.head.appendChild(styleSheet);
 
 export default GamePageJetX;

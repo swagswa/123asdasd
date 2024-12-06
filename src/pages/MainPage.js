@@ -1,72 +1,60 @@
-import React from "react";
-import GameCard from "../components/GameCard";
-import image1win from "../assets/image1.png";
-import image2 from "../assets/image2.png";
-import image3 from "../assets/image3.png";
-import image4 from "../assets/image4.png";
-import image5 from "../assets/image5.png";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import GameCard from '../components/GameCard';
+import image1 from '../assets/image1.png';
+import image2 from '../assets/image2.png';
+import image3 from '../assets/image3.png';
+import image4 from '../assets/image4.png';
+import image5 from '../assets/image5.png';
+import image6 from '../assets/image6.png';
+import matrixImage from '../assets/images (1)-Photoroom (1)-Photoroom.png';
 import './MainPage.css';
 
-const games = [
-  {
-    id: 1,
-    image: image2,
-    title: "Lucky Jet",
-    link: "/game1",
-    theme: "red"
-  },
-  {
-    id: 2,
-    image: image5,
-    title: "JetX",
-    link: "/game3",
-    theme: "gold"
-  },
-  {
-    id: 3,
-    image: image4,
-    title: "Space X",
-    link: "/game2",
-    theme: "purple"
-  },
-  {
-    id: 4,
-    image: image3,
-    title: "Rocket Queen",
-    link: "/game4",
-    theme: "blue"
-  }
-];
-
 const MainPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="root">
-      <div className="particles">
-        {[...Array(15)].map((_, index) => (
-          <div key={index} className="particle" />
-        ))}
-      </div>
-      
+      <img src={image1} alt="Logo" className="logo" />
       <div className="container">
-        <header className="header">
-          <img 
-            src={image1win} 
-            alt="1win signals" 
-            className="header__logo"
+        <div className="main">
+          <GameCard
+            image={image4}
+            title="JetX"
+            link="/game3"
+            theme="blue"
           />
-        </header>
-        
-        <main className="main">
-          {games.map((game) => (
-            <GameCard
-              key={game.id}
-              image={game.image}
-              title={game.title}
-              link={game.link}
-              theme={game.theme}
-            />
-          ))}
-        </main>
+          <GameCard
+            image={image2}
+            title="LuckyJet"
+            link="/game1"
+            theme="red"
+          />
+          <GameCard
+            image={image3}
+            title="SpaceX"
+            link="/game2"
+            theme="gold"
+          />
+          <GameCard
+            image={matrixImage}
+            title="Matrix"
+            link="/game4"
+            theme="green"
+          />
+          <GameCard
+            image={image5}
+            title="Rocket Queen"
+            link="/game5"
+            theme="purple"
+          />
+          <GameCard
+            image={image6}
+            title="New Game"
+            link="/game6"
+            theme="orange"
+          />
+        </div>
       </div>
     </div>
   );
