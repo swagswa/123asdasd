@@ -5,8 +5,6 @@ import './GamePageMatrix.css';
 
 const GamePageMatrix = () => {
   const navigate = useNavigate();
-  const [betAmount, setBetAmount] = useState(0.2);
-  const [balance, setBalance] = useState(0);
   const [selectedSize, setSelectedSize] = useState('6x15');
   const [scale, setScale] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -103,7 +101,6 @@ const GamePageMatrix = () => {
     setIsPlaying(false);
     setActiveCells([]);
     setCurrentRow(0);
-    setBetAmount(0.2);
   };
 
   const renderGrid = () => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import GameCard from '../components/GameCard';
 import image1 from '../assets/image1.png';
 import image2 from '../assets/image2.png';
@@ -11,8 +10,6 @@ import matrixImage from '../assets/images (1)-Photoroom (1)-Photoroom.png';
 import './MainPage.css';
 
 const MainPage = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="root">
       <img src={image1} alt="Logo" className="logo" />
