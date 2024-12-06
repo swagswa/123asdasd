@@ -23,19 +23,13 @@ html, body {
 }
 
 .game-container {
-  width: 10vw;
-  height: 10vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  background: linear-gradient(180deg, #0B1622 0%, #0F1C2E 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  font-family: 'Exo 2', sans-serif;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
   box-sizing: border-box;
 }
 
@@ -201,23 +195,44 @@ html, body {
 }
 
 .back-button {
-  position: absolute;
+  position: fixed;
   top: 20px;
   left: 20px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
+  z-index: 1000;
+  padding: 10px 20px;
+  background: rgba(22, 22, 22, 0.95);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  border-radius: 8px;
+  color: #FFD700;
   font-size: 16px;
-  z-index: 1;
+  font-weight: 600;
   font-family: 'Exo 2', sans-serif;
+  cursor: pointer;
   transition: all 0.3s ease;
-  padding: 8px 12px;
-  border-radius: 6px;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 215, 0, 0.2),
+    0 0 8px rgba(255, 215, 0, 0.3);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
 }
 
 .back-button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  border-color: #FFD700;
+  box-shadow: 
+    inset 0 0 15px rgba(255, 215, 0, 0.3),
+    0 0 15px rgba(255, 215, 0, 0.4);
+  transform: translateX(-2px);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.back-button:active {
+  transform: translateX(1px);
+  box-shadow: 
+    inset 0 0 10px rgba(255, 215, 0, 0.2),
+    0 0 8px rgba(255, 215, 0, 0.2);
 }
 
 @keyframes stars {
@@ -247,12 +262,14 @@ html, body {
 }
 
 .logo {
-  width: 150px;
-  height: auto;
   position: absolute;
-  top: var(--base-padding);
+  top: 25px;
   left: 50%;
   transform: translateX(-50%);
+  width: 150px;
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
 
 .center-image {
@@ -392,7 +409,7 @@ html, body {
 .control-button {
   width: 45px;
   height: 45px;
-  border-radius: 50%;  /* Делаем кнопки круглыми */
+  border-radius: 50%;  /* Деаем кнопки круглыми */
   border: 2px solid rgba(0, 255, 157, 0.3);
   background: linear-gradient(145deg, rgba(0, 255, 157, 0.15), rgba(0, 255, 157, 0.05));
   color: #00ff9d;
@@ -614,7 +631,7 @@ html, body {
         filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5)); /* Уменьшаем радиус */
     }
     14.29% {
-        filter: drop-shadow(0 0 10px rgba(255, 127, 0, 0.5)); /* Уменьша��м радиус */
+        filter: drop-shadow(0 0 10px rgba(255, 127, 0, 0.5)); /* Уменьшам радиус */
     }
     28.57% {
         filter: drop-shadow(0 0 10px rgba(255, 255, 0, 0.5)); /* Уменьшаем радиус */
@@ -629,7 +646,7 @@ html, body {
         filter: drop-shadow(0 0 10px rgba(75, 0, 130, 0.5)); /* Уменьшаем радиус */
     }
     85.71% {
-        filter: drop-shadow(0 0 10px rgba(148, 0, 211, 0.5)); /* Уменьшаем радиус */
+        filter: drop-shadow(0 0 10px rgba(148, 0, 211, 0.5)); /* Уменьшаем раиус */
     }
     100% {
         filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5)); /* Возвращаемся к красному */
@@ -641,7 +658,7 @@ html, body {
     height: 150px; /* Установите высоту изображения */
     margin-bottom: 40px;
     margin-top: -70px;
-    animation: rainbowGlow 6s linear infinite; /* Увеличиваем время анимации для плавности */
+    animation: rainbowGlow 6s linear infinite; /* Увеличаем время анимации для плавности */
 }
 
 /* Стили для контейнера с кнопками управления минами */
@@ -690,7 +707,7 @@ html, body {
   box-shadow: 0 2px 8px rgba(0, 255, 157, 0.2);
 }
 
-/* Стили для отключенной кнопки */
+/* Стили для отклюенной кнопки */
 .control-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -778,13 +795,13 @@ html, body {
 }
 
 .game6-control-button {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
   border-radius: 12px;
   background: rgba(22, 22, 22, 0.95);
   border: 2px solid rgba(255, 215, 0, 0.4);
   color: #FFD700;
-  font-size: 24px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -806,13 +823,14 @@ html, body {
 }
 
 .game6-signal-button {
-  padding: 15px 40px;
+  padding: 12px 30px;
+  font-size: 16px;
+  width: auto;
+  max-width: 90%;
   background: rgba(22, 22, 22, 0.95);
   border: 2px solid rgba(255, 215, 0, 0.4);
   border-radius: 12px;
   color: #FFD700;
-  font-size: 18px;
-  font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   cursor: pointer;
@@ -832,15 +850,16 @@ html, body {
 }
 
 .game6-back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 10px 20px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  padding: 8px 15px;
+  font-size: 14px;
   background: rgba(22, 22, 22, 0.95);
   border: 2px solid rgba(255, 215, 0, 0.4);
   border-radius: 8px;
   color: #FFD700;
-  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -879,7 +898,7 @@ html, body {
   animation: pulse 0.3s ease;
 }
 
-/* Стили для отклю��енных кнопок */
+/* Стили для отклюенных кнопок */
 .game6-control-button:disabled,
 .game6-signal-button:disabled {
   opacity: 0.5;
@@ -995,6 +1014,309 @@ html, body {
   100% {
     transform: translateX(500px) translateY(500px) rotate(45deg);
     opacity: 0;
+  }
+}
+
+/* Базовые стили для всех размеров экрана */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Адаптивные стили для элементов */
+.game-element {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 1rem 0;
+  /* Добавляем миним��льный размер, чтобы элементы не становились слишком маленькими */
+  min-width: 280px;
+}
+
+/* Медиа-запросы для разных размеров экрана */
+@media screen and (max-width: 768px) {
+  .game-container {
+    padding: 0.5rem;
+  }
+  
+  .game-element {
+    max-width: 100%;
+    /* Уменьшаем отступы на мобильных устройствах */
+    margin: 0.5rem 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Дополнительные стили для очень маленьких экранов */
+  .game-element {
+    min-width: 200px;
+  }
+}
+
+/* Для предотвращения наезжания элементов */
+* {
+  box-sizing: border-box;
+}
+
+/* Для контроля размера изображений */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Общие стили для всех игровых страниц */
+.game-container, 
+.game1-container, 
+.game2-container, 
+.game3-container,
+.game4-container,
+.game5-container,
+.game6-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Стили для частиц и фоновых эффектов */
+.shooting-star,
+.particle,
+.stars,
+.gradient-overlay,
+.matrix-particles,
+.game-container::before,
+.game-container::after {
+  position: fixed;
+  z-index: 0;
+}
+
+/* Общие стли для всех кнопок back (кроме game4) */
+.back-button,
+.game1-back-button,
+.game2-back-button,
+.game3-back-button,
+.game5-back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  padding: 10px 20px;
+  background: rgba(22, 22, 22, 0.95);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Exo 2', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+}
+
+/* LuckyJet (game1) - красная тема */
+.game1-back-button {
+  border: 2px solid rgba(255, 59, 59, 0.4);
+  color: #ff3b3b;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 59, 59, 0.2),
+    0 0 8px rgba(255, 59, 59, 0.3);
+}
+
+.game1-back-button:hover {
+  border-color: #ff3b3b;
+  box-shadow: 
+    inset 0 0 15px rgba(255, 59, 59, 0.3),
+    0 0 15px rgba(255, 59, 59, 0.4);
+  transform: translateX(-2px);
+  background: rgba(255, 59, 59, 0.1);
+}
+
+/* SpaceX (game2) - золотая тема */
+.game2-back-button {
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  color: #FFD700;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 215, 0, 0.2),
+    0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+.game2-back-button:hover {
+  border-color: #FFD700;
+  box-shadow: 
+    inset 0 0 15px rgba(255, 215, 0, 0.3),
+    0 0 15px rgba(255, 215, 0, 0.4);
+  transform: translateX(-2px);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* JetX (game3) - синяя тема */
+.game3-back-button {
+  border: 2px solid rgba(0, 149, 255, 0.4);
+  color: #0095ff;
+  box-shadow: 
+    inset 0 0 10px rgba(0, 149, 255, 0.2),
+    0 0 8px rgba(0, 149, 255, 0.3);
+}
+
+.game3-back-button:hover {
+  border-color: #0095ff;
+  box-shadow: 
+    inset 0 0 15px rgba(0, 149, 255, 0.3),
+    0 0 15px rgba(0, 149, 255, 0.4);
+  transform: translateX(-2px);
+  background: rgba(0, 149, 255, 0.1);
+}
+
+/* Rocket Queen (game5) - фиолетовая тема */
+.game5-back-button {
+  border: 2px solid rgba(147, 51, 234, 0.4);
+  color: #9333ea;
+  box-shadow: 
+    inset 0 0 10px rgba(147, 51, 234, 0.2),
+    0 0 8px rgba(147, 51, 234, 0.3);
+}
+
+.game5-back-button:hover {
+  border-color: #9333ea;
+  box-shadow: 
+    inset 0 0 15px rgba(147, 51, 234, 0.3),
+    0 0 15px rgba(147, 51, 234, 0.4);
+  transform: translateX(-2px);
+  background: rgba(147, 51, 234, 0.1);
+}
+
+/* Общие эффекты при нажатии для всех кнопок */
+.game1-back-button:active,
+.game2-back-button:active,
+.game3-back-button:active,
+.game5-back-button:active {
+  transform: translateX(1px);
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media screen and (max-width: 480px) {
+  .back-button,
+  .game1-back-button,
+  .game2-back-button,
+  .game3-back-button,
+  .game5-back-button {
+    top: 10px;
+    left: 10px;
+    padding: 8px 15px;
+    font-size: 14px;
+    min-width: 60px;
+  }
+}
+
+/* Стили для основного контента игр */
+.game-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Стили для фона главной страницы */
+.root {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background: linear-gradient(
+    45deg,
+    #0B1622,
+    #1a237e,
+    #311b92,
+    #4a148c,
+    #1a237e,
+    #0B1622
+  );
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* Контейнер для частиц */
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Звезды на фоне */
+.star-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle 4s infinite alternate;
+}
+
+/* Анимация для фона */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Анимация мерцания звезд */
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Стили для логотипа */
+.logo {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+/* Размещаем основной контент над частицами */
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.main {
+  position: relative;
+  z-index: 1;
+  padding-top: 80px;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media screen and (max-width: 480px) {
+  .logo {
+    top: 15px;
+    width: 120px;
+  }
+  
+  .main {
+    padding-top: 60px;
   }
 }
   

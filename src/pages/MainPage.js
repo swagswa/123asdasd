@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import GameCard from '../components/GameCard';
 import image1 from '../assets/image1.png';
 import image2 from '../assets/image2.png';
@@ -10,6 +10,27 @@ import matrixImage from '../assets/images (1)-Photoroom (1)-Photoroom.png';
 import './MainPage.css';
 
 const MainPage = () => {
+  // Создаем частицы при монтировании компонента
+  useEffect(() => {
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'particles-container';
+    document.querySelector('.root').appendChild(particlesContainer);
+
+    // Создаем только мерцающие звезды
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star-particle';
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 4}s`;
+      particlesContainer.appendChild(star);
+    }
+
+    return () => {
+      particlesContainer.remove();
+    };
+  }, []);
+
   return (
     <div className="root">
       <img src={image1} alt="Logo" className="logo" />
