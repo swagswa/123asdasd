@@ -9,18 +9,17 @@ const GamePageMatrix = () => {
   const [scale, setScale] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeCells, setActiveCells] = useState([]);
-  const [currentRow, setCurrentRow] = useState(0);
   
   const gridSizes = [
-    { label: '2x3', value: '2x3', height: 2, width: 3, cellSize: 60 },
-    { label: '3x6', value: '3x6', height: 3, width: 6, cellSize: 55 },
-    { label: '4x9', value: '4x9', height: 4, width: 9, cellSize: 50 },
-    { label: '5x12', value: '5x12', height: 5, width: 12, cellSize: 45 },
-    { label: '6x15', value: '6x15', height: 6, width: 15, cellSize: 40 },
+    { label: '2x3', value: '2x3', height: 2, width: 3 },
+    { label: '3x6', value: '3x6', height: 3, width: 6 },
+    { label: '4x9', value: '4x9', height: 4, width: 9 },
+    { label: '5x12', value: '5x12', height: 5, width: 12 },
+    { label: '6x15', value: '6x15', height: 6, width: 15 },
   ];
 
   const selectedSizeObj = gridSizes.find(size => size.value === selectedSize);
-  const { height, width, cellSize } = selectedSizeObj;
+  const { height, width } = selectedSizeObj;
 
   const getCellSize = (sizeValue) => {
     switch(sizeValue) {
@@ -100,7 +99,6 @@ const GamePageMatrix = () => {
   const handleReset = () => {
     setIsPlaying(false);
     setActiveCells([]);
-    setCurrentRow(0);
   };
 
   const renderGrid = () => {
